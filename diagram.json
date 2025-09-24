@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "author": "Idrissa HEMEDY",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -42,
+      "left": -63,
+      "attrs": { "color": "green", "flip": "1" }
+    },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -114.9, "left": -130.2, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo1", "top": 247.6, "left": 19.2, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 72,
+      "left": -134.95,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 81.6,
+      "left": -67.75,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:5V", "servo1:V+", "red", [ "h-23.81", "v105.6" ] ],
+    [ "esp:26", "servo1:PWM", "green", [ "h-33.41", "v201.6" ] ],
+    [ "esp:GND.1", "servo1:GND", "black", [ "h-14.21", "v144" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht1:SDA", "r1:1", "blue", [ "v0" ] ],
+    [ "esp:12", "r1:2", "blue", [ "v0", "h-100.61" ] ],
+    [ "esp:14", "r2:2", "green", [ "h-71.81" ] ],
+    [ "led1:C", "r2:1", "green", [ "v0" ] ],
+    [ "led1:A", "esp:GND.1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
