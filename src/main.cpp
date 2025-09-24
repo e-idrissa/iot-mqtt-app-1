@@ -17,11 +17,11 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
 Servo servo;
 
 // Informations de connexion WiFi et MQTT
-const char *ssid = "Idrissa";
-const char *password = "244466666";
-const char *mqttServer = "broker.hivemq.com";
-const char *clientID = "ESP32_Client_1";
-const char *topic = "idrissa/Tempdata";
+const char *ssid = "your-wifi-ssid";
+const char *password = "your-wifi-password";
+const char *mqttServer = "your-mqtt.broker.com";
+const char *clientID = "your-client-id";
+const char *topic = "your-topic";
 
 // Variables pour le timing sans blocage
 unsigned long previousMillis = 0;
@@ -48,7 +48,7 @@ void callback(char *topic, byte *payload, unsigned int length)
     }
     Serial.println("📄 Contenu : " + data);
 
-    if (String(topic) == "idrissa/lights")
+    if (String(topic) == "your-name/lights")
     {
         data.toLowerCase();
         if (data == "true")
@@ -60,7 +60,7 @@ void callback(char *topic, byte *payload, unsigned int length)
             digitalWrite(LED, LOW);
         }
     }
-    else if (String(topic) == "idrissa/servo")
+    else if (String(topic) == "your-name/servo")
     {
         int degree = data.toInt();
         Serial.print("⚙️ Déplacement du servo à : ");
@@ -83,8 +83,8 @@ bool reconnect()
     if (client.connect(clientID))
     {
         Serial.println("✅ Connecté !");
-        client.subscribe("idrissa/lights");
-        client.subscribe("idrissa/servo");
+        client.subscribe("your-name/lights");
+        client.subscribe("your-name/servo");
     }
     else
     {
